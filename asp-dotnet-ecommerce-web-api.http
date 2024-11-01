@@ -1,6 +1,29 @@
-@asp_dotnet_ecommerce_web_api_HostAddress = http://localhost:5026
 
-GET {{asp_dotnet_ecommerce_web_api_HostAddress}}/weatherforecast/
-Accept: application/json
+GET http://localhost:5026
 
 ###
+GET http://localhost:5026/api/categories
+
+###
+GET http://localhost:5026/api/categories?searchValue=electronics
+
+###
+POST http://localhost:5026/api/categories
+Content-Type: application/json
+
+{
+    "name" :"clothing",
+    "description": "Electronis including shirts, Pants"
+}
+
+###
+PUT http://localhost:5026/api/categories/fc061d80-dd36-4ca5-a02d-8b5cea49d389
+Content-Type: application/json
+
+{
+    "name" :"",
+    "description": "BAD "
+}
+
+###
+DELETE http://localhost:5026/api/categories/03ff5146-05a6-4cf5-99be-31dc6c98f38a
