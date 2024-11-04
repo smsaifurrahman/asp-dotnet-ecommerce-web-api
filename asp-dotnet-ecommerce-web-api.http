@@ -12,16 +12,16 @@ POST http://localhost:5026/api/categories
 Content-Type: application/json
 
 {
-    "name" :"clothing",
+    "name" :"Smart phone",
     "description": "Electronis including shirts, Pants"
 }
 
 ###
-PUT http://localhost:5026/api/categories/fc061d80-dd36-4ca5-a02d-8b5cea49d389
+PUT http://localhost:5026/api/categories/9fa1a3fe-fca7-43b3-957f-c781a98d8f96
 Content-Type: application/json
 
 {
-    "name" :"",
+    "name" :"Goru",
     "description": "BAD "
 }
 
