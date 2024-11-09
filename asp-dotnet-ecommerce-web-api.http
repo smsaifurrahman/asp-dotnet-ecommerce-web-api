@@ -2,22 +2,23 @@
 GET http://localhost:5026
 
 ###
-GET http://localhost:5026/api/categories
+GET http://localhost:5026/v1/api/categories
 
 ###
-GET http://localhost:5026/api/categories?searchValue=electronics
+GET http://localhost:5026/v1/api/categories?searchValue=electronics
 
 ###
-POST http://localhost:5026/api/categories
+POST http://localhost:5026/v1/api/categories
 Content-Type: application/json
 
 {
-    "name" :"Smart phone",
-    "description": "Electronis including shirts, Pants"
+
+    "description": "GREat phone"
+
 }
 
 ###
-PUT http://localhost:5026/api/categories/9fa1a3fe-fca7-43b3-957f-c781a98d8f96
+PUT http://localhost:5026/v1/api/categories/9fa1a3fe-fca7-43b3-957f-c781a98d8f96
 Content-Type: application/json
 
 {
@@ -26,4 +27,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:5026/api/categories/03ff5146-05a6-4cf5-99be-31dc6c98f38a
+DELETE http://localhost:5026/v1/api/categories/03ff5146-05a6-4cf5-99be-31dc6c98f38a

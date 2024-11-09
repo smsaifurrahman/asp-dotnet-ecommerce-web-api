@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace asp_dotnet_ecommerce_web_api.Models.Controllers
 {
     [ApiController]
-    [Route("api/categories")]
+    [Route("v1/api/categories")]
     public class CategoryController : ControllerBase
     {
         private static List<Category> categories = new List<Category>();
@@ -24,23 +24,38 @@ namespace asp_dotnet_ecommerce_web_api.Models.Controllers
 
             // }
 
-            var categoryList = categories.Select(c => new CategoryReadDto{
+            var categoryList = categories.Select(c => new CategoryReadDto
+            {
                 CategoryId = c.CategoryId,
                 Name = c.Name,
                 Description = c.Description,
                 CreatedAt = c.CreatedAt
             }).ToList();
-  
+
             return Ok(categories);
         }
         // POST: /api/categories => create a categories
         [HttpPost]
         public IActionResult CreateCategory([FromBody] CategoryCreateDto categoryData)
         {
-            if (string.IsNullOrEmpty(categoryData.Name))
+
+            if (!ModelState.IsValid)
             {
-                return BadRequest("Category Name is required and can not be empty");
+                var errors = ModelState
+                    .Where(e => e.Value.Errors.Count > 0)
+                    .Select(e => new
+                    {
+                        Field = e.Key,
+                        Message = e.Value.Errors.Select(x => x.ErrorMessage).ToArray()
+                    }).ToList();
+
+                var errorString = string.Join("; ", errors
+        .Select(e => $"{e.Field}: {string.Join(", ", e.Message)}"));
+                return BadRequest(errorString);
             }
+
+
+
             var newCategory = new Category
             {
                 CategoryId = Guid.NewGuid(),
@@ -50,12 +65,13 @@ namespace asp_dotnet_ecommerce_web_api.Models.Controllers
 
             };
             categories.Add(newCategory);
-            var categoryReadDto = new CategoryReadDto {
+            var categoryReadDto = new CategoryReadDto
+            {
                 CategoryId = newCategory.CategoryId,
                 Name = newCategory.Name,
                 Description = newCategory.Description,
                 CreatedAt = newCategory.CreatedAt
-                };
+            };
 
 
             return Created($"/api/categories/{newCategory.CategoryId}", categoryReadDto);
